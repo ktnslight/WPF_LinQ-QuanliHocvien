@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_QLHV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=DB_QLHV;Persist Security Info=True;User ID=light" SettingsObjectName="QLHV.Properties.Settings" SettingsPropertyName="DB_QLHVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BIENLAI" Member="BIENLAIs">
+    <Type Name="BIENLAI">
+      <Column Name="ID_BL" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NGAYBL" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NOIDUNG" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="SOTIEN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_HV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="HOCVIEN_BIENLAI" Member="HOCVIEN" ThisKey="ID_HV" OtherKey="ID_HV" Type="HOCVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHONG" Member="PHONGs">
+    <Type Name="PHONG">
+      <Column Name="ID_P" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENPHONG" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="PHONG_LOP" Member="LOPs" ThisKey="ID_P" OtherKey="ID_P" Type="LOP" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CAUHOI" Member="CAUHOIs">
+    <Type Name="CAUHOI">
+      <Column Name="ID_Q" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_DT" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CAUHOI" Member="CAUHOI1" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="CAUHOI_DAPAN" Member="DAPANs" ThisKey="ID_Q" OtherKey="ID_Q" Type="DAPAN" />
+      <Association Name="DETHI_CAUHOI" Member="DETHI" ThisKey="ID_DT" OtherKey="ID_DT" Type="DETHI" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DAPAN" Member="DAPANs">
+    <Type Name="DAPAN">
+      <Column Name="ID_A" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Q" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DAPAN" Member="DAPAN1" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DA_DUNG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CAUHOI_DAPAN" Member="CAUHOI" ThisKey="ID_Q" OtherKey="ID_Q" Type="CAUHOI" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DETHI" Member="DETHIs">
+    <Type Name="DETHI">
+      <Column Name="ID_DT" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MADE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="DETHI_CAUHOI" Member="CAUHOIs" ThisKey="ID_DT" OtherKey="ID_DT" Type="CAUHOI" />
+      <Association Name="DETHI_KITHI" Member="KITHIs" ThisKey="ID_DT" OtherKey="ID_DT" Type="KITHI" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GIAOVIEN" Member="GIAOVIENs">
+    <Type Name="GIAOVIEN">
+      <Column Name="ID_GV" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HOTENGV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="GIAOVIEN_LOP" Member="LOPs" ThisKey="ID_GV" OtherKey="ID_GV" Type="LOP" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KETQUA" Member="KETQUAs">
+    <Type Name="KETQUA">
+      <Column Name="ID_KQ" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_HV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_KT" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DIEM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="KITHI_KETQUA" Member="KITHI" ThisKey="ID_KT" OtherKey="ID_KT" Type="KITHI" IsForeignKey="true" />
+      <Association Name="HOCVIEN_KETQUA" Member="HOCVIEN" ThisKey="ID_HV" OtherKey="ID_HV" Type="HOCVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHOAHOC" Member="KHOAHOCs">
+    <Type Name="KHOAHOC">
+      <Column Name="ID_KHOA" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENKHOAHOC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYBD" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYKT" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="KHOAHOC_LOP" Member="LOPs" ThisKey="ID_KHOA" OtherKey="ID_KHOA" Type="LOP" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KITHI" Member="KITHIs">
+    <Type Name="KITHI">
+      <Column Name="ID_KT" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="KITHI" Member="KITHI1" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DT" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="KITHI_KETQUA" Member="KETQUAs" ThisKey="ID_KT" OtherKey="ID_KT" Type="KETQUA" />
+      <Association Name="DETHI_KITHI" Member="DETHI" ThisKey="ID_DT" OtherKey="ID_DT" Type="DETHI" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOP" Member="LOPs">
+    <Type Name="LOP">
+      <Column Name="ID_LOP" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENLOP" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SOLUONG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="LICH" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_GV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_KHOA" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ID_P" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="LOP_HOCVIEN" Member="HOCVIENs" ThisKey="ID_LOP" OtherKey="ID_LOP" Type="HOCVIEN" />
+      <Association Name="GIAOVIEN_LOP" Member="GIAOVIEN" ThisKey="ID_GV" OtherKey="ID_GV" Type="GIAOVIEN" IsForeignKey="true" />
+      <Association Name="PHONG_LOP" Member="PHONG" ThisKey="ID_P" OtherKey="ID_P" Type="PHONG" IsForeignKey="true" />
+      <Association Name="KHOAHOC_LOP" Member="KHOAHOC" ThisKey="ID_KHOA" OtherKey="ID_KHOA" Type="KHOAHOC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NGUOIDUNG" Member="NGUOIDUNGs">
+    <Type Name="NGUOIDUNG">
+      <Column Name="TAIKHOAN" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MATKHAU" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_LOAI" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="NGUOIDUNG_HOCVIEN" Member="HOCVIENs" ThisKey="TAIKHOAN" OtherKey="TAIKHOAN" Type="HOCVIEN" />
+      <Association Name="PHANQUYEN_NGUOIDUNG" Member="PHANQUYEN" ThisKey="ID_LOAI" OtherKey="ID_LOAI" Type="PHANQUYEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHANQUYEN" Member="PHANQUYENs">
+    <Type Name="PHANQUYEN">
+      <Column Name="ID_LOAI" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="PHANQUYEN_NGUOIDUNG" Member="NGUOIDUNGs" ThisKey="ID_LOAI" OtherKey="ID_LOAI" Type="NGUOIDUNG" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HOCVIEN" Member="HOCVIENs">
+    <Type Name="HOCVIEN">
+      <Column Name="ID_HV" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HOTEN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GIOITINH" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYDANGKY" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NGHENGHIEP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ID_LOP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TAIKHOAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="HOCVIEN_BIENLAI" Member="BIENLAIs" ThisKey="ID_HV" OtherKey="ID_HV" Type="BIENLAI" />
+      <Association Name="HOCVIEN_KETQUA" Member="KETQUAs" ThisKey="ID_HV" OtherKey="ID_HV" Type="KETQUA" />
+      <Association Name="LOP_HOCVIEN" Member="LOP" ThisKey="ID_LOP" OtherKey="ID_LOP" Type="LOP" IsForeignKey="true" />
+      <Association Name="NGUOIDUNG_HOCVIEN" Member="NGUOIDUNG" ThisKey="TAIKHOAN" OtherKey="TAIKHOAN" Type="NGUOIDUNG" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
